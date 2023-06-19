@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="Imagens">
+    <file>nubank.png</file>
+    <file>usuario 2.png</file>
+  </qresource>
+</RCC>
