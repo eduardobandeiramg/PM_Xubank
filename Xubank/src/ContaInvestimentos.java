@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class ContaInvestimentos extends Conta implements IIncideJuros{
-        public static double valorEmCustodia;
+        public static double valorEmCustodiaInvestimentos;
         private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
         private double juromin = -0.60 , juromax = 1.5;
         private double imposto = 0.225;
@@ -16,7 +16,7 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
 
 
                 static{
-            valorEmCustodia = 0;
+            valorEmCustodiaInvestimentos = 0;
         }
 
     ContaInvestimentos() {
@@ -41,7 +41,7 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
         if(valor > 0){
                     dinheiro += valor;
                     addMovimentacao(valor);
-                    valorEmCustodia += valorEmCustodia;
+                    valorEmCustodiaInvestimentos += valorEmCustodiaInvestimentos;
                     atualizarSaldoNoMes(valor);
         }
         else{
@@ -59,7 +59,7 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
         else{
             dinheiro = dinheiroSacado;
             addMovimentacao(- valor);
-            valorEmCustodia -= valorEmCustodia;
+            valorEmCustodiaInvestimentos -= valorEmCustodiaInvestimentos;
             atualizarSaldoNoMes( - valor);
         }
 
@@ -106,6 +106,8 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
     }
 
     
-
+        public static double getValorEmCustodia() {
+        return valorEmCustodiaInvestimentos;
+    }
 
 }

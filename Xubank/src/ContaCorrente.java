@@ -11,13 +11,13 @@ public class ContaCorrente extends Conta{
     private double limiteDeCredito;
     private double taxa = 0.03;
     private double tarifaFixa = 10.00;
-    public static double valorEmCustodia;
+    public static double valorEmCustodiaCorrente;
     private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
 
 
 
             static{
-            valorEmCustodia = 0;
+            valorEmCustodiaCorrente = 0;
         }
 
     ContaCorrente() {
@@ -67,7 +67,7 @@ public class ContaCorrente extends Conta{
         else{
             dinheiro -= dinheiroSacado;
             addMovimentacao(- valor);
-            valorEmCustodia -= valor;
+            valorEmCustodiaCorrente -= valor;
             atualizarSaldoNoMes(- valor);
         }
     }
@@ -86,9 +86,13 @@ public class ContaCorrente extends Conta{
             dinheiro += valor;
         }
         addMovimentacao(valor);
-        valorEmCustodia += valor;
+        valorEmCustodiaCorrente += valor;
         atualizarSaldoNoMes(valor);
 
+    }
+
+    public static double getValorEmCustodia() {
+        return valorEmCustodiaCorrente;
     }
 
 }

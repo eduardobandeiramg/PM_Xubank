@@ -8,13 +8,13 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class ContaRendaFixa extends Conta implements IIncideJuros{
-        public static double valorEmCustodia;
+        public static double valorEmCustodiaRendaFixa;
         private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
         private double juromin = 0.5 , juromax = 0.85;
         private double imposto = 0.15;
 
         static{
-            valorEmCustodia = 0;
+            valorEmCustodiaRendaFixa = 0;
         }
 
     ContaRendaFixa() {
@@ -39,7 +39,7 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
         if(valor > 0){
                     dinheiro += valor;
                     addMovimentacao(valor);
-                    valorEmCustodia += valorEmCustodia;
+                    valorEmCustodiaRendaFixa += valorEmCustodiaRendaFixa;
                     atualizarSaldoNoMes(valor);
         }
         else{
@@ -57,7 +57,7 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
         else{
             dinheiro =  dinheiroSacado;
             addMovimentacao(- valor);
-            valorEmCustodia -= valorEmCustodia;
+            valorEmCustodiaRendaFixa -= valorEmCustodiaRendaFixa;
             atualizarSaldoNoMes(- valor);
         }
 
@@ -97,5 +97,9 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
 
     public double getDinheiro(){
         return dinheiro + calculaJuros();
+    }
+
+        public static double getValorEmCustodia() {
+        return valorEmCustodiaRendaFixa;
     }
 }

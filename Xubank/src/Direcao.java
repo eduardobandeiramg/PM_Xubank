@@ -7,6 +7,8 @@ public static class Direcao {
 
 
     public static double valorEmCustodia(Conta conta){
+        double valorTotal;
+        valorTotal = conta.getValorEmCustodia();
 
     }
 

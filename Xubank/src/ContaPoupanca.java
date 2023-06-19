@@ -8,12 +8,12 @@ import java.time.Period;
 
 public class ContaPoupanca extends Conta implements IIncideJuros{
         private double juros = 0.006;
-        public static double valorEmCustodia;
+        public static double valorEmCustodiaPoupanca;
         public static double jurosEmCustodia;
         private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
 
                 static{
-            valorEmCustodia = 0;
+            valorEmCustodiaPoupanca = 0;
         }
 
     ContaPoupanca() {
@@ -39,7 +39,7 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
         if(valor > 0){
                     dinheiro += valor;
                     addMovimentacao(valor);
-                    valorEmCustodia += valorEmCustodia;
+                    valorEmCustodiaPoupanca += valorEmCustodiaPoupanca;
                     atualizarSaldoNoMes(valor);
         }
         else{
@@ -57,7 +57,7 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
         else{
             dinheiro = dinheiroSacado;
             addMovimentacao(- valor);
-            valorEmCustodia -= valorEmCustodia;
+            valorEmCustodiaPoupanca -= valorEmCustodiaPoupanca;
             atualizarSaldoNoMes(- valor);
         }
 
@@ -94,5 +94,7 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
         return dinheiro + calculaJuros();
     }
 
-    
+        public static double getValorEmCustodia() {
+        return valorEmCustodiaPoupanca;
+    }
 }
