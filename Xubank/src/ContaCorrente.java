@@ -8,40 +8,56 @@ import java.time.LocalDate;
 
 public class ContaCorrente extends Conta{
 
-    private double limiteCreditoTotal;
-    private double limiteCreditoReal;
+    private double limiteDeCredito;
     private double taxa = 0.03;
     private double tarifaFixa = 10.00;
+    public static double valorEmCustodia;
+    private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
+
+
+
+            static{
+            valorEmCustodia = 0;
+        }
 
     ContaCorrente() {
         super();
         this.descricao = "Corrente";
-        this.limiteCreditoTotal = 0;
+        this.limiteDeCredito = 0;
     }
 
     //Metodos get
-    private double getLimiteCreditoReal(){
-        return limiteCreditoReal;
+    private double getLimiteDeCredito(){
+        return limiteDeCredito;
     }
 
-    public void setLimiteCreditoReal(double limiteCreditoReal) {
-        this.limiteCreditoReal = limiteCreditoReal;
-    }
-
-    public void aumentarLimiteDeCredito(double limite) throws InvalidAttributesException {
+    public void atualizarLimiteDeCredito(double limite) throws InvalidAttributesException {
         if(limite > 0) {
-            limiteCreditoTotal = limite;
+            limiteDeCredito = limite;
         }
         else{
             throw new InvalidAttributesException("Limite nao pode ser negativo!");
         }
     }
 
+        public void atualizarSaldoNoMes(Double valor){
+        //atuaiza o saldo para a chave do mês em questão
+        if(saldoNoMes.containsKey(LocalDate.now())){
+            double saldoAnterior = saldoNoMes.get(LocalDate.now());
+            Double novoValor = saldoAnterior - valor;
+            saldoNoMes.put(LocalDate.now() , novoValor);
+        }
+        else{
+            saldoNoMes.put(LocalDate.now() , valor);
+        }
+
+    }
+
     @Override
     public void sacarDinheiro(double valor) {
         LocalDate hoje = LocalDate.now();
 
-        double dinheiroParaSacar = dinheiro + limiteCreditoReal;
+        double dinheiroParaSacar = dinheiro + limiteDeCredito;
 
         double dinheiroSacado = (dinheiro) - valor;
 
@@ -51,6 +67,8 @@ public class ContaCorrente extends Conta{
         else{
             dinheiro -= dinheiroSacado;
             addMovimentacao(- valor);
+            valorEmCustodia -= valor;
+            atualizarSaldoNoMes(- valor);
         }
     }
 
@@ -68,6 +86,9 @@ public class ContaCorrente extends Conta{
             dinheiro += valor;
         }
         addMovimentacao(valor);
+        valorEmCustodia += valor;
+        atualizarSaldoNoMes(valor);
+
     }
 
 }

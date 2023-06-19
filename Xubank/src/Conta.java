@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
+
 public abstract class Conta{
 
+    protected  Cliente cliente;
     protected String descricao;
     protected double dinheiro;
-    Map<LocalDate, List<Double>> movimentacoes = new HashMap<>();
+    protected Map<LocalDate, List<Double>> movimentacoes = new HashMap<>();
 
-    Conta(){
+    Conta(Cliente cliente){
+        this.cliente = cliente;
         this.dinheiro = 0;
     }
 
@@ -22,34 +25,8 @@ public abstract class Conta{
         return dinheiro;
     }
 
-    /**
-     * Metodo para depositar dinheiro na conta.
-     * @param valor valor a ser depsitado na conta.
-     * */
-    public void depositarDinheiro(double valor){
-
-        dinheiro += valor;
-
-    }
-
-    /**
-     * Metodo para sacar dinheiro da conta.
-     * @param valor valor a ser depsitado na conta.
-     * */
-    public void sacarDinheiro(double valor){
-
-        double dinheiroSacado = dinheiro - valor;
-
-        if(dinheiroSacado<0){
-            throw new RuntimeException("Saldo Insuficinete!");
-        }
-        else{
-            dinheiro = dinheiroSacado;
-        }
-
-    }
-
     public void addMovimentacao(Double valor){
+        // Atualiza o histório de movimentações da conta
         // Se ja existem movimentações registradas para hoje, adicionar o valor à chave data de hoje
             if (movimentacoes.containsKey(LocalDate.now())) {
             List<Double> valores = movimentacoes.get(LocalDate.now());
@@ -65,12 +42,14 @@ public abstract class Conta{
     }
 
     public void puxarSituacao(){
+        // Mostra a situação atual para o dia de hoje
         LocalDate hoje = LocalDate.now();
         System.out.println("Situação atual para o dia " + hoje + ": ");
         System.out.println("Saldo em conta: " + dinheiro);
     }
 
         public void puxarExtrato(){
+            // Mostra o histórico de movimentações nos últimos 30 dias
             LocalDate hoje = LocalDate.now();
             LocalDate inicio = hoje.minusMonths(1);
             

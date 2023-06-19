@@ -1,5 +1,6 @@
-import com.trolltech.qt.gui.QApplication;
-import com.trolltech.qt.gui.QMainWindow;
+import java.util.TimerTask;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App {
 
@@ -13,8 +14,5 @@ public class App {
         gui.setupUi(mainWindow);
         QApplication.execStatic();
         QApplication.shutdown();
-
-
-    }
 
 }

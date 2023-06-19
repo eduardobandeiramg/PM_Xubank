@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Cliente extends Pessoa{
 
     private String senha;
-    private final ArrayList<Conta> contasDoCliente = new ArrayList<>(4);
+    private final ArrayList<Conta> contasDoCliente = new ArrayList<>();
 
 
     /**
