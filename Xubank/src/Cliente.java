@@ -84,4 +84,15 @@ public class Cliente extends Pessoa{
 
     }
 
+    /**
+     * @param conta
+     */
+    public void puxarExtrato(Conta conta){
+        conta.puxarExtrato();
+    }
+
+    public void puxarSituacao(Conta conta){
+        conta.puxarSituacao();
+    }
+
 }

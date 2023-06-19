@@ -1,9 +1,17 @@
 import javax.naming.directory.InvalidAttributesException;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.time.LocalDate;
+
 
 public class ContaCorrente extends Conta{
 
     private double limiteCreditoTotal;
     private double limiteCreditoReal;
+    private double taxa = 0.03;
+    private double tarifaFixa = 10.00;
 
     ContaCorrente() {
         super();
@@ -31,6 +39,7 @@ public class ContaCorrente extends Conta{
 
     @Override
     public void sacarDinheiro(double valor) {
+        LocalDate hoje = LocalDate.now();
 
         double dinheiroParaSacar = dinheiro + limiteCreditoReal;
 
@@ -40,7 +49,25 @@ public class ContaCorrente extends Conta{
             throw new RuntimeException("Saldo Insuficinete!");
         }
         else{
-            dinheiro = dinheiroSacado;
+            dinheiro -= dinheiroSacado;
+            addMovimentacao(- valor);
         }
     }
+
+    @Override
+    public void depositarDinheiro(double valor){
+        double multiplicador = 1 + taxa;
+        double valorADescontar = (dinheiro * -1) * multiplicador + tarifaFixa;
+        if(dinheiro >= 0){
+            dinheiro += valor;
+        }
+        else if (dinheiro < 0 && valor >= valorADescontar){
+            dinheiro += (valor - valorADescontar);
+        }
+        else{
+            dinheiro += valor;
+        }
+        addMovimentacao(valor);
+    }
+
 }
