@@ -20,8 +20,8 @@ public class ContaCorrente extends Conta{
             valorEmCustodiaCorrente = 0;
         }
 
-    ContaCorrente() {
-        super();
+    ContaCorrente(Cliente cliente) {
+        super(cliente);
         this.descricao = "Corrente";
         this.limiteDeCredito = 0;
     }
