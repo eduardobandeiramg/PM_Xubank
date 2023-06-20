@@ -25,6 +25,9 @@ public abstract class Conta{
         return dinheiro;
     }
 
+    /*Método que é chamado em toda movimentação da conta para salvar essa movimentação
+    vinvulada a uma data e permitir que seja retirdado um extrato da conta 
+    */
     public void addMovimentacao(Double valor){
         // Atualiza o histório de movimentações da conta
         // Se ja existem movimentações registradas para hoje, adicionar o valor à chave data de hoje
@@ -40,14 +43,16 @@ public abstract class Conta{
 
 
     }
-
+    /*Método que apresenta o saldo atual da conta */
     public void puxarSituacao(){
         // Mostra a situação atual para o dia de hoje
         LocalDate hoje = LocalDate.now();
         System.out.println("Situação atual para o dia " + hoje + ": ");
         System.out.println("Saldo em conta: " + dinheiro);
     }
-
+        /*Método que mostra o extrato da conta (histório de movimentações 
+        dos útllimos 30 dias. depósitos são mostrados como valores positivos e saques
+        são mostrados como os valores negativos) */
         public void puxarExtrato(){
             // Mostra o histórico de movimentações nos últimos 30 dias
             LocalDate hoje = LocalDate.now();
@@ -61,4 +66,7 @@ public abstract class Conta{
 		}		
 
         }
+        /*Os métodos da classe mãe de depositar e sacar que deveriam ser declarados aqui e depoois 
+         * sobrescritos foram descidos para as classes filhas devido a um erro não indentificado
+         */
 }

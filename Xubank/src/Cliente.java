@@ -75,11 +75,12 @@ public class Cliente extends Pessoa{
 
     /**
      * Metodo que retorna a descricao do cliente com todas as suas informacoes.
+     * (Nome, CPF e idade)
      * */
     public String descricaoCliente(){
 
         return "Cliente: " + nome + "\n" +
-                "Idade: " + idade + "\n" +
+                "Idade: " + getIdade(dataDeNascimento) + "\n" +
                 nomeContasCliente();
 
     }
@@ -87,10 +88,12 @@ public class Cliente extends Pessoa{
     /**
      * @param conta
      */
+
+     //Método que recebe uma conta do cliente e retorna o extrato do último mês dessa conta
     public void puxarExtrato(Conta conta){
         conta.puxarExtrato();
     }
-
+    //Método que recebe uma conta cdo cliente como parâmetro e retorna a situação da conta (saldo)
     public void puxarSituacao(Conta conta){
         conta.puxarSituacao();
     }
