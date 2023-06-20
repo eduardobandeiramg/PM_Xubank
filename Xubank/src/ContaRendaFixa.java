@@ -96,8 +96,4 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
     public double getDinheiro(){
         return dinheiro + calculaJuros();
     }
-
-        public static double getValorEmCustodia() {
-        return valorEmCustodiaRendaFixa;
-    }
 }

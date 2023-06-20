@@ -85,7 +85,7 @@ public class Cliente extends Pessoa{
     public String descricaoCliente(){
 
         return "Cliente: " + nome + "\n" +
-                "Idade: " + getIdade(dataDeNascimento) + "\n" +
+                "Idade: " + getIdade() + "\n" +
                 nomeContasCliente();
 
     }

@@ -8,14 +8,8 @@ import java.time.Period;
 
 public class ContaPoupanca extends Conta implements IIncideJuros{
         private double juros = 0.006;
-        public static double valorEmCustodiaPoupanca;
         public static double jurosEmCustodia;
-
-        static{
-            valorEmCustodiaPoupanca = 0;
-        }
-
-
+        
     public ContaPoupanca(){
 
     }
@@ -48,9 +42,5 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
 
     public double getDinheiro(){
         return dinheiro + calculaJuros();
-    }
-
-        public static double getValorEmCustodia() {
-        return valorEmCustodiaPoupanca;
     }
 }

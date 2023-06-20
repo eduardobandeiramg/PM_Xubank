@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Pessoa {
 
     protected String nome;
-    protected String dataDeNascimento;
+    protected static String dataDeNascimento;
     protected String  cpf;
 
     /**
@@ -40,10 +40,10 @@ public class Pessoa {
      *
      * @param data data de nascimento da pessoa.
      * */
-    protected static int getIdade(String data) {
+    protected static int getIdade() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataNascimento = LocalDate.parse(data, formatter);
+        LocalDate dataNascimento = LocalDate.parse(dataDeNascimento, formatter);
 
         LocalDate dataAtual = LocalDate.now();
         return Period.between(dataNascimento, dataAtual).getYears();
