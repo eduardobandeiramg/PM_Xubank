@@ -25,6 +25,16 @@ public abstract class Conta{
 
     }
 
+    //Metodos Set
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
     //Metodos get
     public String getDescricao() {
         return descricao;
