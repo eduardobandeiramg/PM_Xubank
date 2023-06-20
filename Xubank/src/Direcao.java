@@ -1,4 +1,4 @@
-public static class Direcao {
+/* public static class Direcao {
     Cliente[] clientes;
     ContaCorrente[] contasCorrente;
     ContaInvestimento[] contasInvestimento;
@@ -6,7 +6,7 @@ public static class Direcao {
     ContasRendaFixa[] contasRendaFixa;
 
 
-    public static double valorEmCustodia(Conta conta){
+        public static double valorEmCustodia(Conta conta){
         double valorTotal;
         valorTotal = conta.getValorEmCustodia();
 
@@ -19,4 +19,5 @@ public static class Direcao {
     public static Cliente clientesExtremos(){
         
     }
-}
+}*/
+

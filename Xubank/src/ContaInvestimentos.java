@@ -19,12 +19,8 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
             valorEmCustodiaInvestimentos = 0;
         }
 
-    public ContaInvestimentos(Cliente cliente) {
-        super(cliente);
-        this.descricao = "Investimento";
-    }
-
     public ContaInvestimentos(){
+        descricao = "Investimento";
         
     }
 
@@ -39,18 +35,6 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
             saldoNoMes.put(LocalDate.now() , valor);
         }
 
-    }
-
-        public void depositarDinheiro(double valor){
-        if(valor > 0){
-                    dinheiro += valor;
-                    addMovimentacao(valor);
-                    valorEmCustodiaInvestimentos += valorEmCustodiaInvestimentos;
-                    atualizarSaldoNoMes(valor);
-        }
-        else{
-            System.out.println("Não é possível depositar valores menores ou iguais a zero");
-        }
     }
 
         public void sacarDinheiro(double valor){

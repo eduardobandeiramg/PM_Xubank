@@ -10,63 +10,15 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
         private double juros = 0.006;
         public static double valorEmCustodiaPoupanca;
         public static double jurosEmCustodia;
-        private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
 
-                static{
+        static{
             valorEmCustodiaPoupanca = 0;
         }
 
-    public ContaPoupanca(Cliente cliente) {
-        super(cliente);
-        this.descricao = "Poupança";
-    }
 
     public ContaPoupanca(){
 
     }
-
-        public void atualizarSaldoNoMes(Double valor){
-        //atuaiza o saldo para a chave do mês em questão
-        if(saldoNoMes.containsKey(LocalDate.now())){
-            double saldoAnterior = saldoNoMes.get(LocalDate.now());
-            Double novoValor = saldoAnterior - valor;
-            saldoNoMes.put(LocalDate.now() , novoValor);
-        }
-        else{
-            saldoNoMes.put(LocalDate.now() , valor);
-        }
-
-    }
-
-
-    public void depositarDinheiro(double valor){
-        if(valor > 0){
-                    dinheiro += valor;
-                    addMovimentacao(valor);
-                    valorEmCustodiaPoupanca += valorEmCustodiaPoupanca;
-                    atualizarSaldoNoMes(valor);
-        }
-        else{
-            System.out.println("Não é possível depositar valores menores ou iguais a zero");
-        }
-    }
-
-        public void sacarDinheiro(double valor){
-
-        double dinheiroSacado = dinheiro - valor;
-
-        if(dinheiroSacado<0){
-            throw new RuntimeException("Saldo Insuficinete!");
-        }
-        else{
-            dinheiro = dinheiroSacado;
-            addMovimentacao(- valor);
-            valorEmCustodiaPoupanca -= valorEmCustodiaPoupanca;
-            atualizarSaldoNoMes(- valor);
-        }
-
-    }
-
     @Override
     public double calculaJuros() {
         double multiplicador = 1 + juros;

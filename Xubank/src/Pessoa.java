@@ -15,7 +15,12 @@ public class Pessoa {
      * @param data data de nascimento da pessoa.
      * @param cpf cpf da pessoa.
      * */
-    public Pessoa(String nome, String data, String cpf) {
+    public Pessoa(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+
+    public Pessoa (String nome , String data , String cpf){
         this.nome = nome;
         this.dataDeNascimento = data;
         this.cpf = cpf;

@@ -28,6 +28,11 @@ public class Cliente extends Pessoa{
 
     }
 
+    public Cliente (String nome , String cpf , String senha){
+        super(nome , cpf);
+        this.senha = senha;
+    }
+
     /**
      * Metodo que adiciona uma nova conta ao cliente, caso a conta ja existe para o clinete, n é possivel adicionar.
      *

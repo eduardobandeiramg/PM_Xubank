@@ -17,15 +17,9 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
             valorEmCustodiaRendaFixa = 0;
         }
 
-    public ContaRendaFixa(Cliente cliente) {
-        super(cliente);
-        this.descricao = "Renda Fixa";
-    }
-
     public ContaRendaFixa(){
         
     }
-
         public void atualizarSaldoNoMes(Double valor){
         //atuaiza o saldo para a chave do mês em questão
         if(saldoNoMes.containsKey(LocalDate.now())){

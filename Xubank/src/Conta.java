@@ -7,33 +7,20 @@ import java.time.LocalDate;
 
 public abstract class Conta{
 
-    protected  Cliente cliente;
     protected String descricao;
     protected double dinheiro;
     protected Map<LocalDate, List<Double>> movimentacoes = new HashMap<>();
-
-    Conta(Cliente cliente){
-        this.cliente = cliente;
-        this.dinheiro = 0;
-    }
+    protected  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
 
     public Conta(){
-        cliente = null;
         descricao = null;
         dinheiro = 0;
         movimentacoes = null;
-
     }
 
     //Metodos Set
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-    public Cliente getCliente() {
-        return cliente;
     }
     //Metodos get
     public String getDescricao() {
@@ -44,7 +31,7 @@ public abstract class Conta{
     }
 
     /*Método que é chamado em toda movimentação da conta para salvar essa movimentação
-    vinvulada a uma data e permitir que seja retirdado um extrato da conta 
+    vinculada a uma data e permitir que seja retirdado um extrato da conta 
     */
     public void addMovimentacao(Double valor){
         // Atualiza o histório de movimentações da conta
@@ -84,7 +71,40 @@ public abstract class Conta{
 		}		
 
         }
-        /*Os métodos da classe mãe de depositar e sacar que deveriam ser declarados aqui e depoois 
-         * sobrescritos foram descidos para as classes filhas devido a um erro não indentificado
-         */
+
+        public void depositarDinheiro(double valor){
+        if(valor > 0){
+                    dinheiro += valor;
+                    addMovimentacao(valor);
+                    atualizarSaldoNoMes(valor);
+        }
+        else{
+            System.out.println("Não é possível depositar valores menores ou iguais a zero");
+        }
+    }
+
+        public void sacarDinheiro(double valor){
+        double dinheiroSacado = dinheiro - valor;
+        if(dinheiroSacado<0){
+            throw new RuntimeException("Saldo Insuficinete!");
+        }
+        else{
+            dinheiro = dinheiroSacado;
+            addMovimentacao(- valor);
+            atualizarSaldoNoMes(- valor);
+        }
+    }
+
+        public void atualizarSaldoNoMes(Double valor){
+        //atuaiza o saldo para a chave do mês em questão
+        if(saldoNoMes.containsKey(LocalDate.now())){
+            double saldoAnterior = saldoNoMes.get(LocalDate.now());
+            Double novoValor = saldoAnterior - valor;
+            saldoNoMes.put(LocalDate.now() , novoValor);
+        }
+        else{
+            saldoNoMes.put(LocalDate.now() , valor);
+        }
+
+    }
 }
