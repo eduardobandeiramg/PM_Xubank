@@ -17,9 +17,13 @@ public class ContaRendaFixa extends Conta implements IIncideJuros{
             valorEmCustodiaRendaFixa = 0;
         }
 
-    ContaRendaFixa(Cliente cliente) {
+    public ContaRendaFixa(Cliente cliente) {
         super(cliente);
         this.descricao = "Renda Fixa";
+    }
+
+    public ContaRendaFixa(){
+        
     }
 
         public void atualizarSaldoNoMes(Double valor){

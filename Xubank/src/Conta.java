@@ -17,6 +17,14 @@ public abstract class Conta{
         this.dinheiro = 0;
     }
 
+    public Conta(){
+        cliente = null;
+        descricao = null;
+        dinheiro = 0;
+        movimentacoes = null;
+
+    }
+
     //Metodos get
     public String getDescricao() {
         return descricao;

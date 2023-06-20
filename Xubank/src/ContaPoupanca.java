@@ -16,9 +16,13 @@ public class ContaPoupanca extends Conta implements IIncideJuros{
             valorEmCustodiaPoupanca = 0;
         }
 
-    ContaPoupanca(Cliente cliente) {
+    public ContaPoupanca(Cliente cliente) {
         super(cliente);
         this.descricao = "Poupança";
+    }
+
+    public ContaPoupanca(){
+
     }
 
         public void atualizarSaldoNoMes(Double valor){

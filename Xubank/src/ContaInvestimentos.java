@@ -19,9 +19,13 @@ public class ContaInvestimentos extends Conta implements IIncideJuros{
             valorEmCustodiaInvestimentos = 0;
         }
 
-    ContaInvestimentos(Cliente cliente) {
+    public ContaInvestimentos(Cliente cliente) {
         super(cliente);
         this.descricao = "Investimento";
+    }
+
+    public ContaInvestimentos(){
+        
     }
 
         public void atualizarSaldoNoMes(Double valor){
