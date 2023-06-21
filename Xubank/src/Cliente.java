@@ -105,4 +105,8 @@ public class Cliente extends Pessoa {
         conta.puxarSituacao();
     }
 
+    public ArrayList<Conta> getContasDoCliente(){
+        return contasDoCliente;
+    }
+
 }

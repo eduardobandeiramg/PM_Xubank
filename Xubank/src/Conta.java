@@ -17,6 +17,7 @@ public abstract class Conta {
         descricao = null;
         dinheiro = 0;
         movimentacoes = null;
+        Direcao.adicionarConta(this);
     }
 
     // Metodos Set

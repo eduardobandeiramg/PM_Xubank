@@ -9,7 +9,7 @@ public class ContaRendaFixa extends Conta implements IIncideJuros, ICalcularImpo
     private double taxaDeCustodia = 20;
 
     public ContaRendaFixa() {
-
+        descricao = "Renda fixa";
     }
 
     /*
