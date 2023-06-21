@@ -10,18 +10,18 @@ public class PessoaTest {
     Pessoa pessoa;
 
     @BeforeEach
-    public void init(){
+    public void init() {
 
         pessoa = new Pessoa("Pedro", "20/07/2001", "102.435.879-09");
 
     }
 
     @Test
-    public void testarIdade(){
+    public void testarIdade() {
 
         /**
          * Metodo apenas para testar se a data passada calcula a idade correta
-         * */
+         */
 
         assertEquals(21, pessoa.getIdade());
 

@@ -1,71 +1,50 @@
 import javax.naming.directory.InvalidAttributesException;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.time.LocalDate;
 
-
-public class ContaCorrente extends Conta{
+public class ContaCorrente extends Conta {
 
     private double limiteDeCredito;
     private double taxa = 0.03;
     private double tarifaFixa = 10.00;
-    private  Map <LocalDate , Double> saldoNoMes = new HashMap<>();
 
-    public ContaCorrente(){
+    public ContaCorrente() {
         descricao = "Corrente";
         limiteDeCredito = 0;
-        
-    }
 
-    //Metodos get
-    private double getLimiteDeCredito(){
-        return limiteDeCredito;
     }
 
     public void atualizarLimiteDeCredito(double limite) throws InvalidAttributesException {
-        if(limite > 0) {
+        if (limite > 0) {
             limiteDeCredito = limite;
-        }
-        else{
+        } else {
             throw new InvalidAttributesException("Limite nao pode ser negativo!");
         }
     }
-    
-    @Override
-    public void depositarDinheiro(double valor){
-        double multiplicador = 1 + taxa;
-        double valorADescontar = (dinheiro * -1) * multiplicador + tarifaFixa;
-        if(dinheiro >= 0){
-            dinheiro += valor;
-        }
-        else if (dinheiro < 0 && valor >= valorADescontar){
-            dinheiro += (valor - valorADescontar);
-        }
-        else{
-            dinheiro += valor;
-        }
-        addMovimentacao(valor);
-        atualizarSaldoNoMes(valor);
 
+    @Override
+    public void depositarDinheiro(double valor) {
+        if (dinheiro >= 0) {
+            dinheiro += valor;
+            addMovimentacao(valor);
+            atualizarSaldoNoMes(valor);
+        } else {
+            double valorADescontar = Math.abs(dinheiro) * (1 + taxa) + tarifaFixa;
+            double valorADepositar = valor - valorADescontar;
+            dinheiro += valorADepositar;
+            addMovimentacao(valorADepositar);
+            atualizarSaldoNoMes(valorADepositar);
+        }
     }
 
-        @Override
-        public void sacarDinheiro(double valor) {
-        LocalDate hoje = LocalDate.now();
+    @Override
+    public void sacarDinheiro(double valor) {
+        double valorPermitidoParaSaque = dinheiro + limiteDeCredito;
 
-        double dinheiroParaSacar = dinheiro + limiteDeCredito;
-
-        double dinheiroSacado = (dinheiro) - valor;
-
-        if(dinheiroSacado<0){
-            throw new RuntimeException("Saldo Insuficinete!");
-        }
-        else{
-            dinheiro -= dinheiroSacado;
-            addMovimentacao(- valor);
-            atualizarSaldoNoMes(- valor);
+        if (valor > valorPermitidoParaSaque) {
+            System.out.println("Valor indisponível para saque. Excede o montade de saldo + limite de crédito");
+        } else {
+            dinheiro -= valor;
+            addMovimentacao(-valor);
+            atualizarSaldoNoMes(-valor);
         }
     }
 

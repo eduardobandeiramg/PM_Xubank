@@ -6,7 +6,6 @@ import javax.naming.directory.InvalidAttributesException;
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class ContaTest {
 
     Conta contaCorrente;
@@ -17,7 +16,7 @@ public class ContaTest {
     FactoryConta factoryConta = new FactoryConta();
 
     @BeforeEach
-    public void init(){
+    public void init() {
 
         contaCorrente = factoryConta.criarObjeto("Corrente");
         contaInvestimento = factoryConta.criarObjeto("Investimento");
@@ -27,7 +26,7 @@ public class ContaTest {
     }
 
     @Test
-    public void criarContas(){
+    public void criarContas() {
 
         assertEquals("Corrente", contaCorrente.getDescricao());
         assertEquals("Investimento", contaInvestimento.getDescricao());
@@ -37,40 +36,37 @@ public class ContaTest {
     }
 
     @Test
-    public void adicionarDinheiroNaConta(){
-        try{
+    public void adicionarDinheiroNaConta() {
+        try {
 
             contaCorrente.depositarDinheiro(200);
 
             assertEquals(200, contaCorrente.getDinheiro());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
 
     @Test
-    public void sacarDinheiroDaConta(){
+    public void sacarDinheiroDaConta() {
 
         try {
             contaPoupanca.depositarDinheiro(200);
             contaPoupanca.sacarDinheiro(100);
 
             assertEquals(100, contaPoupanca.getDinheiro());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Test
-    public void sacarDinheiroIndisponivel(){
+    public void sacarDinheiroIndisponivel() {
         try {
             contaInvestimento.depositarDinheiro(200);
             contaInvestimento.sacarDinheiro(300);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
