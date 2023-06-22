@@ -3,8 +3,8 @@ import javax.naming.directory.InvalidAttributesException;
 public class ContaCorrente extends Conta {
 
     private double limiteDeCredito;
-    private double taxa = 0.03;
-    private double tarifaFixa = 10.00;
+    private static final double TAXA = 0.03;
+    private static final double TARIFA_FIXA = 10.00;
 
     /**
      * Construtor da conta corrente.
@@ -12,7 +12,6 @@ public class ContaCorrente extends Conta {
     public ContaCorrente() {
         descricao = "Corrente";
         limiteDeCredito = 0;
-
     }
 
     /**
@@ -33,13 +32,11 @@ public class ContaCorrente extends Conta {
         if (dinheiro >= 0) {
             dinheiro += valor;
             addMovimentacao(valor);
-            atualizarSaldoNoMes(valor);
         } else {
-            double valorADescontar = Math.abs(dinheiro) * (1 + taxa) + tarifaFixa;
+            double valorADescontar = Math.abs(dinheiro) * (1 + TAXA) + TARIFA_FIXA;
             double valorADepositar = valor - valorADescontar;
             dinheiro = valorADepositar;
             addMovimentacao(valorADepositar);
-            atualizarSaldoNoMes(valorADepositar);
         }
     }
 
@@ -52,7 +49,6 @@ public class ContaCorrente extends Conta {
         } else {
             dinheiro -= valor;
             addMovimentacao(-valor);
-            atualizarSaldoNoMes(-valor);
         }
     }
 

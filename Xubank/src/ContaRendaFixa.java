@@ -1,11 +1,11 @@
 import javax.naming.directory.InvalidAttributesException;
 
 public class ContaRendaFixa extends Conta implements IIncideJuros, ICalcularImposto {
-    private double juromin = 0.005, juromax = 0.0085;
+    private static final double JUROMIN = 0.005, JUROMAX = 0.0085;
     private double juros = 0.00675; //Juros padrao é a media, caso o novo juros nao seja setado pelo banco.
-    private double imposto = 0.15;
+    private static final double IMPOSTO = 0.15;
     private static final double TAXA_DE_CUSTODIA = 20;
-    double rendimento;
+    private double rendimento;
 
     /**
      * Construtor da classe.
@@ -17,7 +17,7 @@ public class ContaRendaFixa extends Conta implements IIncideJuros, ICalcularImpo
     //Metodo set
     public void setJuros(double juros) throws InvalidAttributesException {
 
-        if(juros>= juromin && juros<= juromax){
+        if(juros>= JUROMIN && juros<= JUROMAX){
             this.juros = juros;
         }else {
             throw new InvalidAttributesException("Valor do juros invalido!");
@@ -39,7 +39,7 @@ public class ContaRendaFixa extends Conta implements IIncideJuros, ICalcularImpo
      **/
     @Override
     public double calcularImpostos() {
-        return rendimento * imposto;
+        return rendimento * IMPOSTO;
     }
 
     /**
@@ -62,7 +62,6 @@ public class ContaRendaFixa extends Conta implements IIncideJuros, ICalcularImpo
         if (valorASacar <= valorMaximoParaSaque) {
             dinheiro -= valorASacar;
             addMovimentacao(-valorASacar);
-            atualizarSaldoNoMes(-valorASacar);
         } else {
             throw new InvalidAttributesException("Não é possível sacar o valor solicitado (excede o valor total permitido para saque)");
         }

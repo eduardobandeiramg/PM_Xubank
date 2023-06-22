@@ -1,5 +1,5 @@
 public class ContaPoupanca extends Conta implements IIncideJuros {
-    private double juros = 0.006;
+    private static final double JUROS = 0.006;
 
     /**
      * Construtor da classe.
@@ -13,7 +13,7 @@ public class ContaPoupanca extends Conta implements IIncideJuros {
     @Override
     public void depositarJurosCliente(double valorAIncidirJuros) {
 
-        double rendimento = valorAIncidirJuros * juros;
+        double rendimento = valorAIncidirJuros * JUROS;
         dinheiro += rendimento;
     }
 

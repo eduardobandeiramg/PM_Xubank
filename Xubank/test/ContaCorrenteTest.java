@@ -1,9 +1,8 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import javax.naming.directory.InvalidAttributeValueException;
 import javax.naming.directory.InvalidAttributesException;
-import java.util.Random;
+import java.time.LocalDate;
+
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -113,7 +112,9 @@ public class ContaCorrenteTest {
         contaCorrente.depositarDinheiro(500);
         contaCorrente.sacarDinheiro(300);
 
-        contaCorrente.puxarExtrato();
+        LocalDate hoje = LocalDate.now();
+
+        assertEquals("Movimentações no dia " + hoje + ": [500.0, -300.0]", contaCorrente.puxarExtrato());
     }
 
     /**
@@ -125,7 +126,9 @@ public class ContaCorrenteTest {
         contaCorrente.depositarDinheiro(500);
         contaCorrente.sacarDinheiro(300);
 
-        contaCorrente.puxarSituacao();
+        LocalDate hoje = LocalDate.now();
+
+        assertEquals("Situação atual para o dia " + hoje + ": " + "\nSaldo em conta: 200.0", contaCorrente.puxarSituacao());
 
     }
 

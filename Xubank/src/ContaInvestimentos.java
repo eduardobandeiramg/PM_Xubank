@@ -1,15 +1,11 @@
 import javax.naming.directory.InvalidAttributesException;
-import java.util.Map;
-import java.util.HashMap;
-import java.time.LocalDate;
 
 public class ContaInvestimentos extends Conta implements IIncideJuros, ICalcularImposto {
-    private Map<LocalDate, Double> saldoNoMes = new HashMap<>();
-    private double juromin = -0.0060, juromax = 0.015;
+    private static final double JUROMIN = -0.0060, JUROMAX = 0.015;
     private double juros = 0.01;
-    private double imposto = 0.225;
-    double taxaDeCustodia = 0.01;
-    double rendimento;
+    private static final double IMPOSTO = 0.225;
+    private static final double TAXA_DE_CUSTODIA = 0.01;
+    private double rendimento;
 
     /**
      * Construtor da classe.
@@ -21,7 +17,7 @@ public class ContaInvestimentos extends Conta implements IIncideJuros, ICalcular
     //Metodo set
     public void setJuros(double juros) throws InvalidAttributesException {
 
-        if(juros>= juromin && juros<= juromax){
+        if(juros>= JUROMIN && juros<= JUROMAX){
             this.juros = juros;
         }else {
             throw new InvalidAttributesException("Valor do juros invalido!");
@@ -46,7 +42,6 @@ public class ContaInvestimentos extends Conta implements IIncideJuros, ICalcular
         if (valor <= valorMaximoParaSaque) {
             dinheiro -= valorASacar;
             addMovimentacao(-valorASacar);
-            atualizarSaldoNoMes(-valorASacar);
         } else {
             throw new InvalidAttributesException("Não é possível sacar o valor solicitado (excede o valor total permitido para saque)");
         }
@@ -54,14 +49,14 @@ public class ContaInvestimentos extends Conta implements IIncideJuros, ICalcular
 
     @Override
     public double calcularImpostos() {
-        return rendimento * imposto;
+        return rendimento * IMPOSTO;
     }
 
     @Override
     public void depositarJurosCliente(double valorAIncidirJuros) {
 
         rendimento = valorAIncidirJuros * juros;
-        double parteDoBanco = (rendimento * taxaDeCustodia);
+        double parteDoBanco = (rendimento * TAXA_DE_CUSTODIA);
         dinheiro += (rendimento - parteDoBanco);
 
     }

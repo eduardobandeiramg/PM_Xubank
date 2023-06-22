@@ -15,14 +15,10 @@ public class Pessoa {
      * @param data data de nascimento da pessoa.
      * @param cpf  cpf da pessoa.
      */
-    public Pessoa(String nome, String cpf) {
-        this.nome = nome;
-        this.cpf = cpf;
-    }
 
     public Pessoa(String nome, String data, String cpf) {
         this.nome = nome;
-        this.dataDeNascimento = data;
+        dataDeNascimento = data;
         this.cpf = cpf;
     }
 
@@ -36,8 +32,6 @@ public class Pessoa {
 
     /**
      * Metodo que calcula a idade da pessoa de acordo com a data de nascimento.
-     *
-     * @param data data de nascimento da pessoa.
      */
     protected static int getIdade() {
 

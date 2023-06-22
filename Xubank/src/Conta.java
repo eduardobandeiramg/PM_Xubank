@@ -10,9 +10,10 @@ public abstract class Conta {
     protected String descricao;
     protected double dinheiro;
     protected Map<LocalDate, List<Double>> movimentacoes;
-    protected Map<LocalDate, Double> saldoNoMes = new HashMap<>();
     protected int id;
     protected static int id_proximo = 1;
+    private String extrato;
+    private String situacaoConta;
 
     /**
      * Construtor da classe conta
@@ -58,11 +59,10 @@ public abstract class Conta {
     /**
      * Método que apresenta o saldo atual da conta
      * */
-    public void puxarSituacao() {
+    public String puxarSituacao() {
         // Mostra a situação atual para o dia de hoje
         LocalDate hoje = LocalDate.now();
-        System.out.println("Situação atual para o dia " + hoje + ": ");
-        System.out.println("Saldo em conta: " + dinheiro);
+        return "Situação atual para o dia " + hoje + ": " + "\nSaldo em conta: " + dinheiro;
     }
 
     /**
@@ -70,18 +70,18 @@ public abstract class Conta {
      * dos útllimos 30 dias. depósitos são mostrados como valores positivos e saques
      * são mostrados como os valores negativos)
      */
-    public void puxarExtrato() {
+    public String puxarExtrato() {
         // Mostra o histórico de movimentações nos últimos 30 dias
         LocalDate hoje = LocalDate.now();
         LocalDate inicio = hoje.minusMonths(1);
 
         while (inicio != hoje.plusDays(1)) {
             if (movimentacoes.containsKey(inicio)) {
-                System.out.println("Movimentações no dia " + inicio + ": " + movimentacoes.get(inicio));
-                break;
+                return  "Movimentações no dia " + inicio + ": " + movimentacoes.get(inicio);
             }
             inicio = inicio.plusDays(1);
         }
+        return null;
     }
 
     /**
@@ -92,7 +92,6 @@ public abstract class Conta {
         if (valor > 0) {
             dinheiro += valor;
             addMovimentacao(valor);
-            atualizarSaldoNoMes(valor);
         } else {
             throw new InvalidAttributesException("Não é possível depositar valores menores ou iguais a zero");
         }
@@ -113,22 +112,6 @@ public abstract class Conta {
         } else {
             dinheiro = dinheiroSacado;
             addMovimentacao(-valor);
-            atualizarSaldoNoMes(-valor);
         }
-    }
-
-    /**
-     * Metodo que atualizao saldo para a chave do mês em questão.
-     * @param valor é o valor da movimentação.
-     * */
-    public void atualizarSaldoNoMes(Double valor) {
-        if (saldoNoMes.containsKey(LocalDate.now())) {
-            double saldoAnterior = saldoNoMes.get(LocalDate.now());
-            Double novoValor = saldoAnterior - valor;
-            saldoNoMes.put(LocalDate.now(), novoValor);
-        } else {
-            saldoNoMes.put(LocalDate.now(), valor);
-        }
-
     }
 }
