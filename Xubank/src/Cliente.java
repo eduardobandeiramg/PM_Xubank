@@ -26,9 +26,9 @@ public class Cliente extends Pessoa {
 
     }
 
-    public Cliente(String nome, String cpf, String senha) {
-        super(nome, cpf);
-        this.senha = senha;
+    //Metodos get
+    public ArrayList<Conta> getContasDoCliente(){
+        return contasDoCliente;
     }
 
     /**
@@ -90,23 +90,19 @@ public class Cliente extends Pessoa {
     }
 
     /**
-     * @param conta
+     * Método que recebe uma conta do cliente e retorna o extrato do último mês
+     * dessa conta
      */
-
-    // Método que recebe uma conta do cliente e retorna o extrato do último mês
-    // dessa conta
     public void puxarExtrato(Conta conta) {
         conta.puxarExtrato();
     }
 
-    // Método que recebe uma conta cdo cliente como parâmetro e retorna a situação
-    // da conta (saldo)
+    /**
+     * Método que recebe uma conta cdo cliente como parâmetro e retorna a situação
+     * da conta (saldo)
+     */
     public void puxarSituacao(Conta conta) {
         conta.puxarSituacao();
-    }
-
-    public ArrayList<Conta> getContasDoCliente(){
-        return contasDoCliente;
     }
 
 }

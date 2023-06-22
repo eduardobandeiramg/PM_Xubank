@@ -6,12 +6,19 @@ public class ContaCorrente extends Conta {
     private double taxa = 0.03;
     private double tarifaFixa = 10.00;
 
+    /**
+     * Construtor da conta corrente.
+     * */
     public ContaCorrente() {
         descricao = "Corrente";
         limiteDeCredito = 0;
 
     }
 
+    /**
+     * Metodo que atualiza o limite de credito da conta.
+     * @param limite é o limite de crédito que será colocado.
+     * */
     public void atualizarLimiteDeCredito(double limite) throws InvalidAttributesException {
         if (limite > 0) {
             limiteDeCredito = limite;
@@ -19,6 +26,7 @@ public class ContaCorrente extends Conta {
             throw new InvalidAttributesException("Limite nao pode ser negativo!");
         }
     }
+
 
     @Override
     public void depositarDinheiro(double valor) {
@@ -29,18 +37,18 @@ public class ContaCorrente extends Conta {
         } else {
             double valorADescontar = Math.abs(dinheiro) * (1 + taxa) + tarifaFixa;
             double valorADepositar = valor - valorADescontar;
-            dinheiro += valorADepositar;
+            dinheiro = valorADepositar;
             addMovimentacao(valorADepositar);
             atualizarSaldoNoMes(valorADepositar);
         }
     }
 
     @Override
-    public void sacarDinheiro(double valor) {
+    public void sacarDinheiro(double valor) throws InvalidAttributesException {
         double valorPermitidoParaSaque = dinheiro + limiteDeCredito;
 
         if (valor > valorPermitidoParaSaque) {
-            System.out.println("Valor indisponível para saque. Excede o montade de saldo + limite de crédito");
+            throw new InvalidAttributesException("Valor indisponível para saque. Excede o montade de saldo + limite de crédito");
         } else {
             dinheiro -= valor;
             addMovimentacao(-valor);
